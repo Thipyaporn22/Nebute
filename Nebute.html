@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8f6ff">
+<title>Nebute — พื้นที่ของเรื่องราว</title>
+<style>
+:root{--ink:#282336;--muted:#827b91;--purple:#8061c9;--deep:#6245aa;--pale:#f1ecff;--line:#eeeaf5;--paper:#fff;--bg:#faf9fc;--shadow:0 14px 40px rgba(62,43,100,.08)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.55}
+button,input,textarea,select{font:inherit}button{cursor:pointer}.top{position:sticky;top:0;z-index:5;background:rgba(250,249,252,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{max-width:1120px;margin:auto;padding:14px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-weight:850;letter-spacing:-.7px;font-size:1.35rem}.brand span{color:var(--purple)}.navlinks{display:flex;gap:8px;flex-wrap:wrap}
+.navlinks button,.quiet{border:0;background:transparent;color:var(--muted);padding:9px 13px;border-radius:12px}.navlinks button.active,.navlinks button:hover{background:var(--pale);color:var(--deep)}
+.wrap{max-width:1120px;margin:auto;padding:28px 22px 70px}.hero{padding:46px 38px;border-radius:28px;background:linear-gradient(120deg,#f1ecff,#fbf9ff 65%,#fff);display:grid;grid-template-columns:1.5fr 1fr;gap:24px;align-items:center;overflow:hidden}
+.eyebrow{font-size:.78rem;font-weight:750;color:var(--purple);letter-spacing:1.5px;text-transform:uppercase}.hero h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.12;letter-spacing:-1.8px;margin:12px 0}.hero p{color:var(--muted);max-width:520px;margin:0 0 22px}.hero-art{min-height:190px;display:grid;place-items:center;position:relative}
+.book{width:155px;height:190px;border-radius:10px 18px 18px 10px;background:linear-gradient(145deg,#a58be4,#7052b8);box-shadow:18px 18px 0 #ded4f6,0 24px 45px #8b72bd55;transform:rotate(7deg);display:grid;place-items:center;color:white;text-align:center;padding:18px}.book b{font-family:Georgia,serif;font-size:1.6rem;line-height:1.1}.book small{opacity:.85;letter-spacing:2px}
+.btn{border:0;background:var(--purple);color:white;padding:11px 17px;border-radius:13px;font-weight:700;box-shadow:0 7px 18px #8061c933}.btn:hover{background:var(--deep)}.btn.secondary{background:var(--pale);color:var(--deep);box-shadow:none}.btn.ghost{background:white;color:var(--deep);border:1px solid var(--line);box-shadow:none}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:34px 0 16px}.section-head h2{margin:0;font-size:1.35rem;letter-spacing:-.5px}.section-head p{margin:4px 0 0;color:var(--muted);font-size:.9rem}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.search{flex:1;min-width:190px;border:1px solid var(--line);background:white;border-radius:13px;padding:11px 14px;outline:none}.search:focus,input:focus,textarea:focus,select:focus{border-color:#b9a6e7;box-shadow:0 0 0 3px #8061c91a;outline:none}
+.filters{display:flex;gap:7px;flex-wrap:wrap}.chip{border:1px solid var(--line);background:white;color:var(--muted);padding:8px 12px;border-radius:999px;font-size:.85rem}.chip.active{background:var(--pale);border-color:#e4dcf8;color:var(--deep)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.novel{background:white;border:1px solid var(--line);border-radius:19px;overflow:hidden;box-shadow:var(--shadow);transition:.2s}.novel:hover{transform:translateY(-3px)}.cover{height:175px;display:grid;place-items:center;color:white;text-align:center;padding:20px;background:linear-gradient(135deg,#aa94e6,#6c51ad)}.cover.c2{background:linear-gradient(135deg,#e4b9ca,#a66e91)}.cover.c3{background:linear-gradient(135deg,#8fa9bd,#536b8b)}.cover.c4{background:linear-gradient(135deg,#d6b58d,#98704c)}.cover .cover-title{font-family:Georgia,serif;font-size:1.55rem;line-height:1.15;max-width:230px}.novel-body{padding:16px}.tag{font-size:.75rem;color:var(--deep);background:var(--pale);padding:4px 9px;border-radius:999px;display:inline-block}.novel h3{margin:10px 0 5px;font-size:1.05rem}.novel p{margin:0;color:var(--muted);font-size:.87rem;min-height:42px}.meta{display:flex;justify-content:space-between;align-items:center;margin-top:14px;color:var(--muted);font-size:.8rem}
+.empty{grid-column:1/-1;text-align:center;background:white;border:1px dashed #dcd4ed;padding:36px;border-radius:18px;color:var(--muted)}
+.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--shadow);max-width:760px;margin:24px auto}.panel h2{margin:0 0 16px}.field{display:grid;gap:6px;margin:13px 0}.field label{font-size:.88rem;font-weight:700}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:#fff;color:var(--ink)}.field textarea{min-height:150px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.notice{padding:12px 14px;border-radius:12px;background:#f7f4ff;color:#6d5a98;font-size:.86rem;margin:14px 0}
+.reader{max-width:780px;margin:24px auto;background:white;border:1px solid var(--line);border-radius:20px;padding:clamp(20px,5vw,48px);box-shadow:var(--shadow)}.reader h1{font-family:Georgia,serif;font-size:2rem}.reader .story{white-space:pre-wrap;line-height:2;color:#484253;margin-top:24px}
+.chapter{display:flex;justify-content:space-between;gap:10px;align-items:center;border-bottom:1px solid var(--line);padding:13px 0}.chapter button{border:0;background:none;color:var(--deep);text-align:left}
+footer{text-align:center;color:#9a93a7;font-size:.8rem;padding:28px 10px}
+.hidden{display:none!important}
+@media(max-width:760px){.hero{grid-template-columns:1fr;padding:32px 24px}.hero-art{min-height:150px}.book{width:120px;height:145px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.nav{padding:12px 16px}.wrap{padding:22px 16px 55px}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}.cover{height:155px}.navlinks button{padding:7px 9px;font-size:.85rem}.brand{font-size:1.15rem}.row{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header class="top"><nav class="nav">
+  <div class="brand">Nebute<span>.</span></div>
+  <div class="navlinks">
+    <button class="active" data-page="home">หน้าหลัก</button>
+    <button data-page="explore">ค้นหานิยาย</button>
+    <button data-page="write">เขียนนิยาย</button>
+  </div>
+</nav></header>
+<main class="wrap">
+<section id="homePage">
+  <div class="hero">
+    <div><div class="eyebrow">A little space for big stories</div><h1>ทุกเรื่องราว<br>เริ่มต้นได้ที่นี่</h1><p>พื้นที่เล็ก ๆ สำหรับนักอ่านและนักเขียน ที่จะพาคุณไปพบกับเรื่องราวบทใหม่ในทุกวัน</p><button class="btn" onclick="go('explore')">เริ่มสำรวจนิยาย ↗</button></div>
+    <div class="hero-art"><div class="book"><div><small>MY NOVEL</small><br><b>Your story<br>starts here.</b></div></div></div>
+  </div>
+  <div class="section-head"><div><h2>นิยายแนะนำ</h2><p>เรื่องราวที่เราอยากชวนให้คุณลองอ่าน</p></div><button class="quiet" onclick="go('explore')">ดูทั้งหมด →</button></div>
+  <div id="featuredGrid" class="grid"></div>
+  <div class="section-head"><div><h2>เรื่องราวล่าสุด</h2><p>ผลงานที่เพิ่งเพิ่มเข้ามา</p></div></div>
+  <div id="latestGrid" class="grid"></div>
+</section>
+<section id="explorePage" class="hidden">
+  <div class="section-head"><div><div class="eyebrow">DISCOVER STORIES</div><h2>ค้นหานิยาย</h2><p>เลือกเรื่องที่ใช่ แล้วออกเดินทางไปกับตัวอักษร</p></div></div>
+  <div class="tools"><input id="search" class="search" placeholder="ค้นหาชื่อเรื่อง ผู้เขียน หรือคำโปรย..." aria-label="ค้นหานิยาย"></div>
+  <div id="filters" class="filters"></div><div id="allGrid" class="grid" style="margin-top:18px"></div>
+</section>
+<section id="writePage" class="hidden">
+  <form class="panel" id="novelForm">
+    <div class="eyebrow">CREATE YOUR STORY</div><h2>เพิ่มนิยายเรื่องใหม่</h2>
+    <div class="notice">ข้อมูลที่เพิ่มจะถูกเก็บไว้ในเบราว์เซอร์ของอุปกรณ์นี้ก่อน ยังไม่ใช่ระบบสมาชิกหรือฐานข้อมูลออนไลน์</div>
+    <div class="field"><label for="title">ชื่อเรื่อง *</label><input id="title" required maxlength="70" placeholder="เช่น ร่มแห่งกาลเวลา"></div>
+    <div class="row">
+      <div class="field"><label for="author">นามปากกา</label><input id="author" placeholder="นามปากกาของคุณ"></div>
+      <div class="field"><label for="genre">หมวดหมู่</label><select id="genre"><option>โรแมนซ์</option><option>แฟนตาซี</option><option>สืบสวน</option><option>GL / ยูริ</option><option>ดราม่า</option><option>วาย / BL</option><option>อื่น ๆ</option></select></div>
+    </div>
+    <div class="field"><label for="desc">คำโปรย</label><textarea id="desc" maxlength="260" placeholder="ชวนผู้อ่านให้รู้จักเรื่องราวของคุณ..."></textarea></div>
+    <div class="field"><label for="chapterTitle">ชื่อตอนแรก (ถ้ามี)</label><input id="chapterTitle" placeholder="บทที่ 1 — จุดเริ่มต้น"></div>
+    <div class="field"><label for="chapterText">เนื้อหาตอนแรก</label><textarea id="chapterText" placeholder="เริ่มเขียนเรื่องราวของคุณตรงนี้..."></textarea></div>
+    <button class="btn" type="submit">บันทึกนิยาย</button>
+  </form>
+</section>
+<section id="detailPage" class="hidden"><div id="detailContent"></div></section>
+<section id="readerPage" class="hidden"><div id="readerContent"></div></section>
+</main>
+<footer>Made with ♡ for storytellers · Nebute</footer>
+<script>
+const starter=[
+{id:"s1",title:"ร่มแห่งกาลเวลา",author:"M. Moon",genre:"แฟนตาซี",desc:"ร่มเก่าคันหนึ่งพาเมย์ย้อนกลับไปพบอดีต แต่ทุกการเปลี่ยนแปลงมีบางสิ่งต้องแลก",cover:0,chapters:[{title:"บทที่ 1 — จุดเริ่มต้นแห่งการเปลี่ยนแปลง",text:"ฝนตกลงมาในเย็นวันนั้น\\nเมย์ไม่คิดเลยว่าร่มเก่า ๆ คันหนึ่งจะเปลี่ยนชีวิตของเธอไปตลอดกาล\\n\\nใต้ชายคาร้านเล็ก ๆ หญิงชราคนหนึ่งยื่นร่มให้ พร้อมคำพูดที่เธอไม่มีวันลืม\\n\\n“ถ้าอยากกลับไปแก้ไขอดีต หนูต้องยอมแลกบางอย่างในปัจจุบันนะ”"}]},
+{id:"s2",title:"New Year Loading…",author:"Praewa",genre:"โรแมนซ์",desc:"ความฝันครั้งใหม่กำลังโหลด และใครบางคนอาจเป็นเหตุผลที่ทำให้หัวใจเริ่มต้นอีกครั้ง",cover:1,chapters:[{title:"บทที่ 1 — ปีใหม่ของฉัน",text:"ปีนี้ฉันมีเป้าหมายมากมาย และหนึ่งในนั้นคือการกล้าที่จะเดินตามความฝันของตัวเอง"}]},
+{id:"s3",title:"The Last Clue",author:"N. North",genre:"สืบสวน",desc:"เบาะแสชิ้นสุดท้ายเชื่อมโยงคนแปลกหน้ากับความลับที่ถูกซ่อนไว้มานาน",cover:2,chapters:[{title:"บทที่ 1 — จดหมายปริศนา",text:"ซองจดหมายสีขาวถูกวางไว้หน้าประตู ไม่มีชื่อผู้ส่ง มีเพียงประโยคเดียวที่เขียนอยู่ด้านใน"}]},
+{id:"s4",title:"ฤดูที่ดอกไม้ผลิบาน",author:"April",genre:"GL / ยูริ",desc:"การพบกันโดยบังเอิญในฤดูร้อน กลายเป็นเรื่องราวที่ทั้งสองคนไม่เคยคาดคิด",cover:3,chapters:[{title:"บทที่ 1 — วันแรกของฤดูร้อน",text:"เสียงกระดิ่งหน้าร้านดังขึ้น พร้อมกับใครบางคนที่ทำให้วันธรรมดาไม่เหมือนเดิม"}]}
+];
+let novels=JSON.parse(localStorage.getItem("nebute_data")||"null")||starter;
+let activeGenre="ทั้งหมด",currentId=null;
+const save=()=>localStorage.setItem("nebute_data",JSON.stringify(novels));
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function card(n){return `<article class="novel"><div class="cover c${n.cover||0}"><div class="cover-title">${esc(n.title)}</div></div><div class="novel-body"><span class="tag">${esc(n.genre)}</span><h3>${esc(n.title)}</h3><p>${esc(n.desc||"ยังไม่มีคำโปรย")}</p><div class="meta"><span>โดย ${esc(n.author||"นักเขียนนิรนาม")}</span><button class="quiet" onclick="openDetail('${n.id}')">อ่านต่อ →</button></div></div></article>`}
+function render(){let sorted=[...novels].reverse();document.getElementById("featuredGrid").innerHTML=sorted.slice(0,3).map(card).join("")||'<div class="empty">ยังไม่มีนิยาย</div>';document.getElementById("latestGrid").innerHTML=sorted.slice(0,3).map(card).join("")||'<div class="empty">เพิ่มนิยายเรื่องแรกของคุณได้เลย</div>';renderExplore()}
+function renderExplore(){let genres=["ทั้งหมด",...new Set(novels.map(n=>n.genre))];document.getElementById("filters").innerHTML=genres.map(g=>`<button class="chip ${g===activeGenre?"active":""}" onclick="setGenre('${esc(g)}')">${esc(g)}</button>`).join("");let q=(document.getElementById("search")?.value||"").toLowerCase();let list=[...novels].reverse().filter(n=>(activeGenre==="ทั้งหมด"||n.genre===activeGenre)&&[n.title,n.author,n.desc,n.genre].join(" ").toLowerCase().includes(q));document.getElementById("allGrid").innerHTML=list.map(card).join("")||'<div class="empty">ไม่พบนิยายที่ค้นหา ลองใช้คำอื่นดูนะ</div>'}
+function setGenre(g){activeGenre=g;renderExplore()}
+function go(page){document.querySelectorAll("main>section").forEach(s=>s.classList.add("hidden"));document.getElementById(page+"Page").classList.remove("hidden");document.querySelectorAll(".navlinks button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));window.scrollTo({top:0,behavior:"smooth"});if(page==="explore")renderExplore()}
+document.querySelectorAll(".navlinks button").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+document.getElementById("search").addEventListener("input",renderExplore);
+function openDetail(id){let n=novels.find(x=>x.id===id);if(!n)return;currentId=id;document.querySelectorAll("main>section").forEach(s=>s.classList.add("hidden"));let sec=document.getElementById("detailPage");sec.classList.remove("hidden");document.querySelectorAll(".navlinks button").forEach(b=>b.classList.remove("active"));document.getElementById("detailContent").innerHTML=`<div class="reader"><button class="quiet" onclick="go('explore')">← กลับไปหน้าค้นหา</button><div class="cover c${n.cover||0}" style="border-radius:16px;margin:18px 0"><div class="cover-title">${esc(n.title)}</div></div><span class="tag">${esc(n.genre)}</span><h1>${esc(n.title)}</h1><p style="color:var(--muted)">โดย ${esc(n.author||"นักเขียนนิรนาม")}</p><p>${esc(n.desc||"ยังไม่มีคำโปรย")}</p><div class="section-head"><div><h2>สารบัญ</h2><p>${n.chapters.length} ตอน</p></div><button class="btn secondary" onclick="addChapter('${id}')">+ เพิ่มตอน</button></div><div id="chapterList">${n.chapters.map((c,i)=>`<div class="chapter"><button onclick="readChapter('${id}',${i})">${esc(c.title||"ตอนที่ "+(i+1))}</button><span style="color:var(--muted);font-size:.8rem">ตอนที่ ${i+1}</span></div>`).join("")||"ยังไม่มีตอน"}</div></div>`;window.scrollTo(0,0)}
+function readChapter(id,i){let n=novels.find(x=>x.id===id),c=n?.chapters[i];if(!c)return;document.querySelectorAll("main>section").forEach(s=>s.classList.add("hidden"));let sec=document.getElementById("readerPage");sec.classList.remove("hidden");document.getElementById("readerContent").innerHTML=`<article class="reader"><button class="quiet" onclick="openDetail('${id}')">← กลับสารบัญ</button><div class="eyebrow" style="margin-top:25px">${esc(n.title)}</div><h1>${esc(c.title||"ตอนที่ "+(i+1))}</h1><div class="story">${esc(c.text)}</div><div style="margin-top:30px"><button class="btn secondary" onclick="openDetail('${id}')">กลับไปสารบัญ</button></div></article>`;window.scrollTo(0,0)}
+function addChapter(id){let title=prompt("ชื่อตอนใหม่");if(title===null)return;let text=prompt("เนื้อหาตอน");if(text===null)return;let n=novels.find(x=>x.id===id);n.chapters.push({title,text});save();openDetail(id)}
+document.getElementById("novelForm").addEventListener("submit",e=>{e.preventDefault();let n={id:"n"+Date.now(),title:document.getElementById("title").value.trim(),author:document.getElementById("author").value.trim(),genre:document.getElementById("genre").value,desc:document.getElementById("desc").value.trim(),cover:Math.floor(Math.random()*4),chapters:[]};let ct=document.getElementById("chapterTitle").value.trim(),tx=document.getElementById("chapterText").value.trim();if(ct||tx)n.chapters.push({title:ct||"บทที่ 1",text:tx});novels.push(n);save();e.target.reset();render();go("explore");alert("บันทึกนิยายเรียบร้อยแล้ว 💜")});
+render();
+</script>
+</body></html>
